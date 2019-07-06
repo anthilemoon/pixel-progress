@@ -1,0 +1,127 @@
+/* Author - https://bitsofco.de/github-contribution-graph-css-grid/ */
+
+/* Grid-related CSS */
+
+:root {
+    --square-size: 15px;
+    --square-gap: 5px;
+    --week-width: calc(var(--square-size) + var(--square-gap));
+  }
+  
+  .months { grid-area: months; }
+  .days { grid-area: days; }
+  .squares { grid-area: squares; }
+  
+  .graph {
+    display: inline-grid;
+    grid-template-areas: "empty months"
+                         "days squares";
+    grid-template-columns: auto 1fr;
+    grid-gap: 10px;
+  }
+  
+  .months {
+    display: grid;
+    grid-template-columns: calc(var(--week-width) * 4) /* Jan */
+                           calc(var(--week-width) * 4) /* Feb */
+                           calc(var(--week-width) * 4) /* Mar */
+                           calc(var(--week-width) * 5) /* Apr */
+                           calc(var(--week-width) * 4) /* May */
+                           calc(var(--week-width) * 4) /* Jun */
+                           calc(var(--week-width) * 5) /* Jul */
+                           calc(var(--week-width) * 4) /* Aug */
+                           calc(var(--week-width) * 4) /* Sep */
+                           calc(var(--week-width) * 5) /* Oct */
+                           calc(var(--week-width) * 4) /* Nov */
+                           calc(var(--week-width) * 5) /* Dec */;
+  }
+  
+  .days,
+  .squares {
+    display: grid;
+    grid-gap: var(--square-gap);
+    grid-template-rows: repeat(7, var(--square-size));
+  }
+  
+  .squares {
+    grid-auto-flow: column;
+    grid-auto-columns: var(--square-size);
+  }
+  
+  
+  /* Other styling */
+  
+  body {
+    font-family: Arial;
+    font-size: 12px;
+  }
+
+  .title {
+        font-family: 'Share Tech Mono', monospace, Arial !important; 
+  }
+
+  ul {
+    list-style-type: none;
+    }
+  
+  .graph {
+    padding-top: 25px;
+    padding-right: 20px;
+    padding-left: 0px;
+    padding-bottom: 15px;
+    border: 1px #C9D5FF solid;
+    margin-top: 20px;
+    margin-right:5%;
+    margin-left: 10%;
+  }
+  
+  .days li:nth-child(odd) {
+    visibility: hidden;
+  }
+  
+  .squares li {
+    background-color: #D7DDF2;
+  }
+  
+  .squares li[data-level="1"] {
+    background-color: #577AF9;
+  }
+  
+  .squares li[data-level="2"] {
+    background-color: #3960EF;
+  }
+  
+  .squares li[data-level="3"] {
+    background-color: #1B3699;
+  }
+
+  .bg-blue {
+    background-color: #3960EF;
+  }
+
+  /* Tooltip */
+
+  .tooltip-main {
+    background: #FFFFFF;
+    border: 1px solid #0000;
+    border-radius: 0% !important;
+    color: #000;
+    font-family: monospace !important;;
+    font-size: 9px;
+  }
+
+  .tooltip-inner {
+    background: #FFFFFF;
+    border-radius: 0% !important;
+    color: rgb(0, 0, 0, .7);
+    border: 1px solid #D7DDF2;
+  }
+
+  .tooltip.show {
+    opacity: 1;
+  }
+  
+  .bs-tooltip-auto[x-placement^=bottom] .arrow::before,
+  .bs-tooltip-bottom .arrow::before {
+    border-bottom-color: transparent;
+  }
