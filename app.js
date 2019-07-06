@@ -1,8 +1,8 @@
 const express = require('express');
 const request = require('request');
-fs = require('fs'),
-readline = require('readline'),
-{google} = require('googleapis'),
+const fs = require('fs');
+const readline = require('readline');
+const {google} = require('googleapis');
 
 app = express();
 
@@ -13,7 +13,7 @@ app.use(express.static('public'));
 app.get("/", function(req, res){
 
     // Load client secrets from a local file.
-fs.readFile('credentials.json', (err, content) => {
+    fs.readFile('credentials.json', (err, content) => {
     if (err) return console.log('Error loading client secret file:', err);
     // Authorize a client with credentials, then call the Google Sheets API.
     authorize(JSON.parse(content), pullData);
@@ -22,7 +22,7 @@ fs.readFile('credentials.json', (err, content) => {
   function pullData(auth) {
     const sheets = google.sheets({version: 'v4', auth});
     sheets.spreadsheets.values.batchGet({
-      spreadsheetId: 'YOUR_SPREADSHEET_ID',
+      spreadsheetId: '1E1UruTlU6RhqtPkZq3McgbdnWJMATCBTfdHRk4J_f8E',
       ranges: ['2019!A2:A366', '2019!B2:B366', '2019!C2:C366', '2019!D2:D366']
     }, (err, response) => {
       if (err) return console.log('The API returned an error: ' + err);
@@ -45,7 +45,6 @@ fs.readFile('credentials.json', (err, content) => {
 
       res.render('home', {data: data});
  
-
     });
   }
 
